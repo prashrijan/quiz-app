@@ -139,15 +139,30 @@ const quiz = [
 const startButton = document.querySelector("#startQuiz");
 const landingPage = document.querySelector(".landing-page");
 const quizQsns = document.querySelector(".quiz");
-console.log(quizQsns);
+const answers = document.querySelectorAll(".answers");
+const questionElement = document.querySelector(".question");
 
-console.log(startButton);
+let currentQsnIndex = 0;
+let score = 0;
+
+const displayQuestion = () => {
+  questionElement.innerHTML = `
+        <h2><span class="qsnNo">${currentQsnIndex + 1}. </span>${
+    quiz[currentQsnIndex].question
+  }</h2>
+    `;
+};
+
+console.log(quiz[currentQsnIndex]);
+
+// answers.forEach((answer) => {
+//   answer.addEventListener("click", selectAnswer);
+// });
+
 const startQuiz = () => {
-  console.log("start the quiz");
   landingPage.classList.add("d-none");
   quizQsns.classList.replace("d-none", "d-block");
+  displayQuestion();
 };
 
 startButton.addEventListener("click", startQuiz);
-
-console.log(quiz);
