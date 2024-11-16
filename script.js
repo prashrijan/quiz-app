@@ -136,4 +136,13 @@ const quiz = [
   },
 ];
 
+const startButton = document.querySelector("#startQuiz");
+
+console.log(startButton);
+const startQuiz = () => {
+  console.log("start the quiz");
+};
+
+startButton.addEventListener("click", startQuiz);
+
 console.log(quiz);
