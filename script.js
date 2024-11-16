@@ -137,10 +137,15 @@ const quiz = [
 ];
 
 const startButton = document.querySelector("#startQuiz");
+const landingPage = document.querySelector(".landing-page");
+const quizQsns = document.querySelector(".quiz");
+console.log(quizQsns);
 
 console.log(startButton);
 const startQuiz = () => {
   console.log("start the quiz");
+  landingPage.classList.add("d-none");
+  quizQsns.classList.replace("d-none", "d-block");
 };
 
 startButton.addEventListener("click", startQuiz);
