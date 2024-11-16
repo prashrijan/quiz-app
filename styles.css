@@ -18,3 +18,10 @@ body {
     rgba(132, 45, 253, 1) 100%
   );
 }
+
+.answers .answer:hover {
+  background-color: #343a40 !important;
+  color: white !important;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
