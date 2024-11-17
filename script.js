@@ -181,7 +181,14 @@ const displayAnswerOptions = () => {
   const currentOptions = quiz[currentQsnIndex].options;
   currentOptions.forEach((option) => {
     const answer = document.createElement("div");
-    answer.classList.add("row", "bg-light", "p-3", "rounded-3", "answer");
+    answer.classList.add(
+      "row",
+      "bg-light",
+      "p-3",
+      "rounded-3",
+      "answer",
+      "hover"
+    );
     answer.innerText = option.answer;
     answer.addEventListener("click", () => checkAnswer(option, answer));
     optionDiv.appendChild(answer);
@@ -195,8 +202,7 @@ const getCorrectAnswer = () => {
 const checkAnswer = (selectedOption, answerElement) => {
   const answers = document.querySelectorAll(".answer");
   answers.forEach((answer) => {
-    answer.classList.add("disabled");
-    console.log(answer.classList);
+    answer.classList.remove("hover");
   });
 
   if (selectedOption.correct) {

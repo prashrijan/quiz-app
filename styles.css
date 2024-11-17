@@ -19,7 +19,7 @@ body {
   );
 }
 
-.answers .answer:hover {
+.answers .hover:hover {
   background-color: #343a40 !important;
   color: white !important;
   cursor: pointer;
