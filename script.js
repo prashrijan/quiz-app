@@ -139,12 +139,35 @@ const quiz = [
 const startButton = document.querySelector("#startQuiz");
 const landingPage = document.querySelector(".landing-page");
 const quizQsns = document.querySelector(".quiz");
-
+const endPage = document.querySelector(".end-quiz");
 const optionDiv = document.querySelector(".options-div");
 const questionElement = document.querySelector(".question");
 let currentQsnIndex = 0;
 let score = 0;
 
+endPage.classList.add("d-none");
+
+const endQuiz = () => {
+  endPage.classList.replace("d-none", "d-block");
+
+  endPage.innerHTML = `
+          <div class="row text-center mb-4">
+            <h1 class="fw-bold text-primary">The Quiz has ended.</h1>
+            <p class="text-secondary fs-5">You scored <span>${score}/${quiz.length}</span></p>
+          </div>
+          <div class="row justify-content-center">
+            <button
+              type="button"
+              class="btn btn-primary col-4 fs-5 py-3 rounded-pill shadow-sm"
+              onclick = "startQuiz()"
+            >
+              Start Again
+            </button>
+          </div>
+  `;
+
+  quizQsns.classList.replace("d-block", "d-none");
+};
 const displayQuestion = () => {
   questionElement.innerHTML = `
         <h2><span class="qsnNo">${currentQsnIndex + 1}. </span>${
@@ -171,7 +194,10 @@ const getCorrectAnswer = () => {
 
 const checkAnswer = (selectedOption, answerElement) => {
   const answers = document.querySelectorAll(".answer");
-  answers.forEach((answer) => answer.classList.add("disabled"));
+  answers.forEach((answer) => {
+    answer.classList.add("disabled");
+    console.log(answer.classList);
+  });
 
   if (selectedOption.correct) {
     console.log(answerElement);
@@ -194,16 +220,20 @@ const checkAnswer = (selectedOption, answerElement) => {
       displayQuestion();
       displayAnswerOptions();
     } else {
-      alert("you failed");
+      endQuiz();
     }
   }, 2000);
 };
 
 const startQuiz = () => {
+  currentQsnIndex = 0;
+  score = 0;
   landingPage.classList.add("d-none");
   quizQsns.classList.replace("d-none", "d-block");
   displayQuestion();
   displayAnswerOptions();
+
+  endPage.classList.replace("d-block", "d-none");
 };
 
 startButton.addEventListener("click", startQuiz);
