@@ -140,10 +140,13 @@ const startButton = document.querySelector("#startQuiz");
 const landingPage = document.querySelector(".landing-page");
 const quizQsns = document.querySelector(".quiz");
 const answers = document.querySelectorAll(".answers");
+const optionDiv = document.querySelector(".options-div");
 const questionElement = document.querySelector(".question");
-
 let currentQsnIndex = 0;
 let score = 0;
+const currentOptions = quiz[currentQsnIndex].options;
+
+console.log(currentOptions);
 
 const displayQuestion = () => {
   questionElement.innerHTML = `
@@ -153,7 +156,22 @@ const displayQuestion = () => {
     `;
 };
 
-console.log(quiz[currentQsnIndex]);
+const displayAnswerOptions = () => {
+  console.log("first");
+  currentOptions.forEach((option) => {
+    const answer = document.createElement("div");
+    answer.classList.add("row");
+    answer.classList.add("bg-light");
+    answer.classList.add("p-3");
+    answer.classList.add("rounded-3");
+    answer.classList.add("answer");
+    answer.innerText = option.answer;
+
+    console.log(answer);
+
+    optionDiv.appendChild(answer);
+  });
+};
 
 // answers.forEach((answer) => {
 //   answer.addEventListener("click", selectAnswer);
@@ -163,6 +181,7 @@ const startQuiz = () => {
   landingPage.classList.add("d-none");
   quizQsns.classList.replace("d-none", "d-block");
   displayQuestion();
+  displayAnswerOptions();
 };
 
 startButton.addEventListener("click", startQuiz);
