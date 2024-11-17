@@ -142,6 +142,10 @@ const quizQsns = document.querySelector(".quiz");
 const endPage = document.querySelector(".end-quiz");
 const optionDiv = document.querySelector(".options-div");
 const questionElement = document.querySelector(".question");
+
+const correctAudio = new Audio("assests/correct-83487.mp3");
+const wrongAudio = new Audio("assests/wrong-47985.mp3");
+
 let currentQsnIndex = 0;
 let score = 0;
 
@@ -206,10 +210,12 @@ const checkAnswer = (selectedOption, answerElement) => {
   });
 
   if (selectedOption.correct) {
+    correctAudio.play();
     console.log(answerElement);
     answerElement.classList.replace("bg-light", "bg-success");
     score++;
   } else {
+    wrongAudio.play();
     answerElement.classList.replace("bg-light", "bg-danger");
 
     const correctAnswer = getCorrectAnswer();
