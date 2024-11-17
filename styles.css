@@ -10,6 +10,10 @@ body {
   height: 100%;
 }
 
+.w-half {
+  width: 50%;
+}
+
 .wrapper {
   background: rgb(34, 195, 190);
   background: linear-gradient(
@@ -24,4 +28,10 @@ body {
   color: white !important;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+}
+
+@media screen and (max-width: 600px) {
+  .w-half {
+    width: 100%;
+  }
 }
