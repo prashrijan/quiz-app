@@ -139,14 +139,11 @@ const quiz = [
 const startButton = document.querySelector("#startQuiz");
 const landingPage = document.querySelector(".landing-page");
 const quizQsns = document.querySelector(".quiz");
-const answers = document.querySelectorAll(".answers");
+
 const optionDiv = document.querySelector(".options-div");
 const questionElement = document.querySelector(".question");
 let currentQsnIndex = 0;
 let score = 0;
-const currentOptions = quiz[currentQsnIndex].options;
-
-console.log(currentOptions);
 
 const displayQuestion = () => {
   questionElement.innerHTML = `
@@ -157,25 +154,50 @@ const displayQuestion = () => {
 };
 
 const displayAnswerOptions = () => {
-  console.log("first");
+  optionDiv.innerHTML = "";
+  const currentOptions = quiz[currentQsnIndex].options;
   currentOptions.forEach((option) => {
     const answer = document.createElement("div");
-    answer.classList.add("row");
-    answer.classList.add("bg-light");
-    answer.classList.add("p-3");
-    answer.classList.add("rounded-3");
-    answer.classList.add("answer");
+    answer.classList.add("row", "bg-light", "p-3", "rounded-3", "answer");
     answer.innerText = option.answer;
-
-    console.log(answer);
-
+    answer.addEventListener("click", () => checkAnswer(option, answer));
     optionDiv.appendChild(answer);
   });
 };
 
-// answers.forEach((answer) => {
-//   answer.addEventListener("click", selectAnswer);
-// });
+const getCorrectAnswer = () => {
+  return quiz[currentQsnIndex].options.find((option) => option.correct).answer;
+};
+
+const checkAnswer = (selectedOption, answerElement) => {
+  const answers = document.querySelectorAll(".answer");
+  answers.forEach((answer) => answer.classList.add("disabled"));
+
+  if (selectedOption.correct) {
+    console.log(answerElement);
+    answerElement.classList.replace("bg-light", "bg-success");
+    score++;
+  } else {
+    answerElement.classList.replace("bg-light", "bg-danger");
+
+    const correctAnswer = getCorrectAnswer();
+    answers.forEach((answer) => {
+      if (answer.innerText === correctAnswer) {
+        answer.classList.replace("bg-light", "bg-success");
+      }
+    });
+  }
+
+  setTimeout(() => {
+    currentQsnIndex++;
+    if (currentQsnIndex < quiz.length) {
+      displayQuestion();
+      displayAnswerOptions();
+    } else {
+      alert("you failed");
+    }
+  }, 2000);
+};
 
 const startQuiz = () => {
   landingPage.classList.add("d-none");
